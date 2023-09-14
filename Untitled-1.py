@@ -26,7 +26,7 @@ def consulta_Eorder(num_TdC,nome_municipio):
     })
     options = webdriver.ChromeOptions()
     options.headless = False
-    options.add_argument("--window-position=-1200,0")
+    options.add_argument("--window-position=1200,0")
     options.add_experimental_option("prefs", chrome_options._experimental_options["prefs"])
     driver = webdriver.Chrome(service=Service(), options=options)
 
@@ -36,7 +36,7 @@ def consulta_Eorder(num_TdC,nome_municipio):
     driver.get("https://eordercoe.enel.com/geocallcoe/w/LoginServlet")
     driver.find_elements(By.ID, "USER")[0].send_keys("ENELINT\BR0012049443")
     driver.find_elements(By.ID, "INPUTPASS")[0].send_keys("Saca40f31f1!")
-    driver.find_elements(By.ID, "COMPANY")[0].send_keys("coelce")
+    driver.find_elements(By.ID, "COMPANY")[0].send_keys("")
     driver.find_elements(By.ID, "submbtn")[0].click()
     driver.maximize_window()
 
