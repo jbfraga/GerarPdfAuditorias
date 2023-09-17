@@ -1,1 +1,6 @@
-resultado/26347992_Incidencia.pdf
+resultado/*
+imagens/*
+*.pyc
+credenciais.py
+*.ipynb
+*.js

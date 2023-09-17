@@ -5,4 +5,4 @@ for row in rows:
     cols = row.split(";")
 
 
-    os.system("python Untitled-1.py {} {}".format(cols[0], cols[1]))
+    os.system("python Eorder.py {} {} {}".format(cols[0], cols[1],cols[2]))

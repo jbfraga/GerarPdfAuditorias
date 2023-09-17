@@ -1,8 +1,8 @@
 
 import sys
-def consulta_Eorder(num_TdC,nome_municipio):
+def consulta_Eorder(num_TdC,nome_municipio,numero_ordem):
 
-    
+    from credenciais import senha_eorder, login_eorder
     from selenium import webdriver
     from selenium.webdriver.chrome.service import Service
     from selenium.webdriver.common.by import By
@@ -10,9 +10,6 @@ def consulta_Eorder(num_TdC,nome_municipio):
     from selenium.webdriver.common.action_chains import ActionChains
     from selenium.webdriver.chrome.options import Options
 
-
-    import pandas
-    import pyautogui
     import time
     from PIL import Image
 
@@ -34,9 +31,9 @@ def consulta_Eorder(num_TdC,nome_municipio):
     """#Login Eorder"""
 
     driver.get("https://eordercoe.enel.com/geocallcoe/w/LoginServlet")
-    driver.find_elements(By.ID, "USER")[0].send_keys("ENELINT\BR0012049443")
-    driver.find_elements(By.ID, "INPUTPASS")[0].send_keys("Saca40f31f1!")
-    driver.find_elements(By.ID, "COMPANY")[0].send_keys("")
+    driver.find_elements(By.ID, "USER")[0].send_keys(login_eorder)
+    driver.find_elements(By.ID, "INPUTPASS")[0].send_keys(senha_eorder)
+    driver.find_elements(By.ID, "COMPANY")[0].send_keys("coelce")
     driver.find_elements(By.ID, "submbtn")[0].click()
     driver.maximize_window()
 
@@ -76,7 +73,7 @@ def consulta_Eorder(num_TdC,nome_municipio):
             # Refaça a pesquisa do elemento a cada iteração
             elemento = driver.find_elements(By.CSS_SELECTOR, "#TV-rvRfmu > div > div > div > table > tbody > tr.tvRow.tvRoll")[i]
             driver.execute_script("var evt = new MouseEvent('dblclick', { bubbles: true, cancelable: true, view: window }); arguments[0].dispatchEvent(evt);", elemento)
-            time.sleep(10)
+            time.sleep(8)
         except Exception as e:
             print(f"Erro: {str(e)}")
     time.sleep(1)
@@ -183,7 +180,7 @@ def consulta_Eorder(num_TdC,nome_municipio):
         
         images.append(image)
 
-    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}.pdf".format(num_TdC, nome_municipio)
+    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}_{}.pdf".format(num_TdC, nome_municipio, numero_ordem)
 
     # Salvar as imagens no arquivo PDF
     images[0].save(
@@ -206,7 +203,7 @@ def consulta_Eorder(num_TdC,nome_municipio):
     # Lista de arquivos de imagem no diretório
     image_files = [os.path.join(image_dir, filename) for filename in os.listdir(image_dir)]
 
-    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}.pdf".format(num_TdC, nome_municipio)
+    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}_{}.pdf".format(num_TdC, nome_municipio,numero_ordem)
 
     # Tamanho de página A4 em pontos (595.276 x 841.890)
     page_width, page_height = A4
@@ -224,7 +221,7 @@ def consulta_Eorder(num_TdC,nome_municipio):
         image = Image.open(image_path)
         
         # Redimensionar a imagem para 70% do tamanho original
-        width_percent = 50
+        width_percent = 80
         width = int(image.width * (width_percent / 100))
         height = int(image.height * (width_percent / 100))
         image = image.resize((width, height), Image.ANTIALIAS)
@@ -264,4 +261,5 @@ def consulta_Eorder(num_TdC,nome_municipio):
 if __name__ == "__main__":
     num_de_TdC = sys.argv[1]
     nome_mun = sys.argv[2]
-    consulta_Eorder(num_de_TdC,nome_mun)
+    num_ordem = sys.argv[3]
+    consulta_Eorder(num_de_TdC,nome_mun,num_ordem)
