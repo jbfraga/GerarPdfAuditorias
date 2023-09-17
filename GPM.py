@@ -99,7 +99,3 @@ driver.execute_script("""
         el.style.width = '40%';
     });
 """)
-
-# %%
-imprimir aqui
-

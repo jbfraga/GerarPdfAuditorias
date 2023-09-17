@@ -3,4 +3,4 @@ imagens/*
 *.pyc
 credenciais.py
 *.ipynb
-*.js
+GPM.js
