@@ -1,14 +1,16 @@
 
 import sys
-def consulta_Eorder(num_TdC,nome_municipio,numero_ordem):
+def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
 
     from credenciais import senha_eorder, login_eorder
+    
     from selenium import webdriver
     from selenium.webdriver.chrome.service import Service
     from selenium.webdriver.common.by import By
     from selenium.webdriver.common.keys import Keys
     from selenium.webdriver.common.action_chains import ActionChains
     from selenium.webdriver.chrome.options import Options
+
 
     import time
     from PIL import Image
@@ -180,7 +182,7 @@ def consulta_Eorder(num_TdC,nome_municipio,numero_ordem):
         
         images.append(image)
 
-    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}_{}.pdf".format(num_TdC, nome_municipio, numero_ordem)
+    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}_eorder.pdf".format(nome_municipio,numero_ordem)
 
     # Salvar as imagens no arquivo PDF
     images[0].save(
@@ -203,7 +205,7 @@ def consulta_Eorder(num_TdC,nome_municipio,numero_ordem):
     # Lista de arquivos de imagem no diretório
     image_files = [os.path.join(image_dir, filename) for filename in os.listdir(image_dir)]
 
-    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}_{}.pdf".format(num_TdC, nome_municipio,numero_ordem)
+    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}_eorder.pdf".format(nome_municipio,numero_ordem)
 
     # Tamanho de página A4 em pontos (595.276 x 841.890)
     page_width, page_height = A4
@@ -221,7 +223,7 @@ def consulta_Eorder(num_TdC,nome_municipio,numero_ordem):
         image = Image.open(image_path)
         
         # Redimensionar a imagem para 70% do tamanho original
-        width_percent = 80
+        width_percent = 30
         width = int(image.width * (width_percent / 100))
         height = int(image.height * (width_percent / 100))
         image = image.resize((width, height), Image.ANTIALIAS)
@@ -260,6 +262,7 @@ def consulta_Eorder(num_TdC,nome_municipio,numero_ordem):
 
 if __name__ == "__main__":
     num_de_TdC = sys.argv[1]
-    nome_mun = sys.argv[2]
-    num_ordem = sys.argv[3]
-    consulta_Eorder(num_de_TdC,nome_mun,num_ordem)
+    nome_mun = sys.argv[3]
+    num_ordem = sys.argv[2]
+    codigo_SOB = sys.argv[4]
+    consulta_Eorder(num_de_TdC,nome_mun,num_ordem,codigo_SOB)
