@@ -178,7 +178,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
         if path.endswith(".jpg"):
                 # Redimensionar a imagem JPG para um tamanho específico (por exemplo, 800x600)
                 width, height = 384, 512
-                image = image.resize((width, height), Image.ANTIALIAS)
+                image = image.resize((width, height),resample=Image.LANCZOS)
         
         images.append(image)
 
@@ -226,7 +226,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
         width_percent = 30
         width = int(image.width * (width_percent / 100))
         height = int(image.height * (width_percent / 100))
-        image = image.resize((width, height), Image.ANTIALIAS)
+        image = image.resize((width, height),resample=Image.LANCZOS)
             
         # Redimensionar a imagem para caber na página (mantendo a proporção)
         image.thumbnail((max_width, max_height))

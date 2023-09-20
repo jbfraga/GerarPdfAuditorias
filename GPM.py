@@ -31,7 +31,7 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     })
 
     options.headless = False
-    options.add_argument("--window-position=-1200,0")
+    options.add_argument("--window-position=1200,0")
     options.add_argument('--kiosk-printing')
     """options.add_argument('--disable-print-preview')"""
     # options.add_argument('--print-to-pdf=nome_do_arquivo.pdf')
