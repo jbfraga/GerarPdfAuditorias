@@ -7,18 +7,15 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     from selenium.webdriver.common.keys import Keys
     from selenium.webdriver.common.action_chains import ActionChains
     from selenium.webdriver.chrome.options import Options
-    import unittest
     import os
     import time
     from PIL import Image
     from credenciais import login_GPM,senha_GPM
-
     import json
 
 
-    # %%
     options = webdriver.ChromeOptions()
-    import json
+    
     settings = {"recentDestinations": [{"id": "Save as PDF", "origin": "local", "account": ""}], "selectedDestinationId": "Save as PDF", "version": 2}
 
     options.add_experimental_option("prefs", {
@@ -39,12 +36,12 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     driver = webdriver.Chrome(service=Service(), options=options)
 
 
-    # %%
+
     driver.get("https://cosampa.gpm.srv.br/gpm/geral/consulta_servico.php")
     tela_consulta_serv = driver.window_handles[0]
     tela_login = driver.window_handles[1]
 
-    # %%
+
     #Login
     driver.switch_to.window(tela_login)
     driver.find_element(By.CSS_SELECTOR,"#idLogin").send_keys(login_GPM)
@@ -54,7 +51,7 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     driver.maximize_window()
 
 
-    # %%
+
     #Pesquisando a ordem
 
     driver.find_element(By.CSS_SELECTOR,"#num_se").send_keys(cod_SOB)
@@ -65,7 +62,7 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     driver.maximize_window()
     time.sleep(3)
 
-    # %%
+
     #Removendo linhas
     driver.execute_script("var l = document.querySelector('body > div:nth-child(11)').remove()")
     time.sleep(0.1)
@@ -114,17 +111,17 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
 
 
 
-    # %% Aumentando imgs
+    #Aumentando imgs
     driver.execute_script(
         "let aumentarImagens = document.querySelector('#div_fotos').querySelectorAll('img');aumentarImagens.forEach((el) => {el.style.width = '40%';})")
 
 
-    # %%
+    
     driver.execute_script('window.print();')
     time.sleep(5)
     driver.quit()
 
-    # %%
+    
     import shutil
 
     # Defina o caminho para a pasta "Downloads" em seu sistema

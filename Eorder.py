@@ -29,7 +29,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     options.add_experimental_option("prefs", chrome_options._experimental_options["prefs"])
     driver = webdriver.Chrome(service=Service(), options=options)
 
-    # %%
+    # 
     """#Login Eorder"""
 
     driver.get("https://eordercoe.enel.com/geocallcoe/w/LoginServlet")
@@ -40,12 +40,12 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     driver.maximize_window()
 
 
-    # %%
+    # 
     """Acessar Lista TDC"""
     driver.find_elements(By.CSS_SELECTOR,"#TBB_tbm2 > div.tbi")[4].click()
     driver.find_elements(By.CSS_SELECTOR,"#TBB_tbm2 > div.tbi")[0].click()
 
-    # %%
+    # 
     """Enviar o TDC e acessar os locais de print"""
 
     driver.find_element(By.XPATH, '//td[label/text() = "Código TdC"]/following-sibling::td[1]//table[1]//tr[1]//td[1]//input').send_keys(num_TdC)
@@ -58,12 +58,12 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
 
 
 
-    # %%
+    # 
     """Acessar a página multimida"""
 
     driver.find_elements(By.CSS_SELECTOR,"img[src='r/std/icons/PC64.png'")[0].click()
 
-    # %%
+    # 
     """Baixar as Fotos do Eorder"""
 
     """clicar em cada linha da foto"""
@@ -82,7 +82,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     driver.find_elements(By.CSS_SELECTOR, "img[src='r/std/icons/chiudi64.png']")[2].click()
 
 
-    # %%
+    # 
     """Clicar em Visualizar planejamento TdC"""
 
     time.sleep(3)
@@ -93,7 +93,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
         last_element = elements[-1]  # Acessa o último elemento da lista
         last_element.click()
 
-    # %%
+    # 
     """Print do retorno de campo e OBS"""
 
     options = webdriver.ChromeOptions()
@@ -119,7 +119,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     driver.find_element(By.CSS_SELECTOR, "#flowscrew").click()
 
 
-    # %%
+    # 
     """Print dos materiais"""
     time.sleep(3)
     driver.find_element(By.CLASS_NAME,"icon_pullright").click()
@@ -152,7 +152,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     driver.quit()
 
 
-    # %%
+    #
     """Juntando as imagens em um pdf"""
     """falta só ele dinamicamente renomear o PDF final"""
 
@@ -190,7 +190,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     )
 
 
-    # %%
+    # 
     """Arrumando o PDF"""
     """Falta estudar um Resize das fotos para não ficarem muito grandes,
     mas já está considerando aqui a junção das fotos em uma só pagina, uma após a outra"""
@@ -252,7 +252,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     
     c.save()
 
-    # %%
+    # 
     """Excluindo as fotos da pasta"""
 
     dir = rf'C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens'
