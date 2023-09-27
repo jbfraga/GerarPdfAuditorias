@@ -11,7 +11,6 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     from selenium.webdriver.common.action_chains import ActionChains
     from selenium.webdriver.chrome.options import Options
 
-
     import time
     from PIL import Image
 
@@ -28,9 +27,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     options.add_argument("--window-position=1200,0")
     options.add_experimental_option("prefs", chrome_options._experimental_options["prefs"])
     driver = webdriver.Chrome(service=Service(), options=options)
-
-    # 
-    # 
+ 
     """#Login Eorder"""
 
     driver.get("https://eordercoe.enel.com/geocallcoe/w/LoginServlet")
@@ -41,15 +38,10 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     driver.maximize_window()
     print("Login ok")
 
-
-    # 
-    # 
     """Acessar Lista TDC"""
     driver.find_elements(By.CSS_SELECTOR,"#TBB_tbm2 > div.tbi")[4].click()
     driver.find_elements(By.CSS_SELECTOR,"#TBB_tbm2 > div.tbi")[0].click()
 
-    # 
-    # 
     """Enviar o TDC e acessar os locais de print"""
 
     driver.find_element(By.XPATH, '//td[label/text() = "Código TdC"]/following-sibling::td[1]//table[1]//tr[1]//td[1]//input').send_keys(num_TdC)
@@ -60,15 +52,10 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     driver.find_elements(By.CSS_SELECTOR,"img[src='r/std/icons/cerca64.png'")[3].click()
     time.sleep(2)
 
-
-
-    # 
-    # 
     """Acessar a página multimida"""
 
     driver.find_elements(By.CSS_SELECTOR,"img[src='r/std/icons/PC64.png'")[0].click()
-
-    # 
+ 
     """Baixar as Fotos do Eorder"""
 
     """clicar em cada linha da foto"""
@@ -86,9 +73,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
             print(f"Erro: {str(e)}")
     time.sleep(1)
     driver.find_elements(By.CSS_SELECTOR, "img[src='r/std/icons/chiudi64.png']")[2].click()
-
-
-    # 
+ 
     """Clicar em Visualizar planejamento TdC"""
 
     time.sleep(3)
@@ -98,8 +83,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     if elements:
         last_element = elements[-1]  # Acessa o último elemento da lista
         last_element.click()
-
-    # 
+ 
     """Print do retorno de campo e OBS"""
 
     options = webdriver.ChromeOptions()
@@ -125,8 +109,6 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
 
     driver.find_element(By.CSS_SELECTOR, "#flowscrew").click()
 
-
-    # 
     """Print dos materiais"""
     time.sleep(3)
     driver.find_element(By.CLASS_NAME,"icon_pullright").click()
@@ -158,8 +140,6 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     print("MATERIAIS OK")
     driver.quit()
 
-
-    #
     """Juntando as imagens em um pdf"""
     """falta só ele dinamicamente renomear o PDF final"""
 
@@ -176,8 +156,6 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
 
     for path in image_files:
         image = Image.open(path)
-        
-        
 
         if image.mode == 'RGBA':
             image = image.convert("RGB")  # Converter para RGB se estiver no modo RGBA
@@ -196,16 +174,10 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
         pdf_path, "PDF", resolution=100.0, save_all=True, append_images=images[1:]
     )
 
-
-    # 
-    # 
     """Arrumando o PDF"""
-    """Falta estudar um Resize das fotos para não ficarem muito grandes,
-    mas já está considerando aqui a junção das fotos em uma só pagina, uma após a outra"""
     import os
     from reportlab.lib.pagesizes import A4
     from reportlab.pdfgen import canvas
-
 
     # Diretório onde as imagens estão localizadas
     image_dir = rf"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens"
@@ -260,7 +232,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     
     c.save()
     print("PDF OK")
-    # 
+
     """Excluindo as fotos da pasta"""
 
     dir = rf'C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens'

@@ -10,7 +10,6 @@ for row in rows:
     
     os.system("python GPM.py {} {} {} {}".format(cols[0], cols[1],cols[2],cols[3]))
 
-import os
 import openpyxl
 
 # Função para listar os arquivos em uma pasta e criar uma planilha Excel com os nomes

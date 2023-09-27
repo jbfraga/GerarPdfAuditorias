@@ -13,7 +13,6 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     from credenciais import login_GPM,senha_GPM
     import json
 
-
     options = webdriver.ChromeOptions()
     
     settings = {"recentDestinations": [{"id": "Save as PDF", "origin": "local", "account": ""}], "selectedDestinationId": "Save as PDF", "version": 2}
@@ -27,20 +26,15 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
         'printing.print_preview_sticky_settings.appState': json.dumps(settings)
     })
 
-    # options.headless = False
     options.add_argument("--window-position=1200,0")
     options.add_argument('--kiosk-printing')
     """options.add_argument('--disable-print-preview')"""
-    # options.add_argument('--print-to-pdf=nome_do_arquivo.pdf')
 
     driver = webdriver.Chrome(service=Service(), options=options)
-
-
 
     driver.get("https://cosampa.gpm.srv.br/gpm/geral/consulta_servico.php")
     tela_consulta_serv = driver.window_handles[0]
     tela_login = driver.window_handles[1]
-
 
     #Login
     driver.switch_to.window(tela_login)
@@ -50,7 +44,6 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     driver.switch_to.window(tela_consulta_serv)
     driver.maximize_window()
     print("LOGIN OK")
-
 
     #Pesquisando a ordem
 
@@ -110,18 +103,15 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     time.sleep(0.1)
     print("LINHAS REMOVIDAS")
 
-
     #Aumentando imgs
     driver.execute_script(
         "let aumentarImagens = document.querySelector('#div_fotos').querySelectorAll('img');aumentarImagens.forEach((el) => {el.style.width = '40%';})")
     print("IMAGENS AUMENTADAS")
-
     
     driver.execute_script('window.print();')
     time.sleep(5)
     driver.quit()
 
-    
     import shutil
 
     # Defina o caminho para a pasta "Downloads" em seu sistema
