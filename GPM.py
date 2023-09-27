@@ -18,7 +18,7 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     settings = {"recentDestinations": [{"id": "Save as PDF", "origin": "local", "account": ""}], "selectedDestinationId": "Save as PDF", "version": 2}
 
     options.add_experimental_option("prefs", {
-        "download.default_directory": r'C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado.pdf',
+        "download.default_directory": r'\resultado.pdf',
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
         "safebrowsing.enabled": False,
@@ -108,20 +108,23 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
         "let aumentarImagens = document.querySelector('#div_fotos').querySelectorAll('img');aumentarImagens.forEach((el) => {el.style.width = '40%';})")
     print("IMAGENS AUMENTADAS")
     
-    driver.execute_script('window.print();')
+    driver.execute_script('window.print()')
     time.sleep(5)
     driver.quit()
 
     import shutil
 
     # Defina o caminho para a pasta "Downloads" em seu sistema
-    pasta_downloads = os.path.expanduser("~") + "\\Downloads"
+    pasta_downloads = os.path.join(os.path.expanduser("~"), "Downloads")
+   
+    diretorio_atual = os.path.dirname(__file__)
+    print(diretorio_atual)
 
     # Verifique se a pasta "Downloads" existe
     if os.path.exists(pasta_downloads):
         # Nome do arquivo que você deseja renomear
         nome_arquivo_antigo = "cosampa.gpm.srv.br_gpm_geral_relatorio_servico.php.pdf"
-
+                               
         # Caminho completo para o arquivo antigo
         caminho_arquivo_antigo = os.path.join(pasta_downloads, nome_arquivo_antigo)
 
@@ -129,7 +132,7 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
         nome_arquivo_novo = "{}_{}_jupiter.pdf".format(numero_ordem,nome_municipio)
 
         # Caminho completo para o arquivo novo
-        caminho_arquivo_novo = os.path.join("C:\\Users\\bruno.fraga\\Desktop\\ADS\\Códigos Cosampa\\Gerar Pdf Auditoria\\GerarPdfAuditorias\\resultado", nome_arquivo_novo)
+        caminho_arquivo_novo = os.path.join("resultado", nome_arquivo_novo)
 
         # Verifique se o arquivo antigo existe na pasta "Downloads"
         if os.path.exists(caminho_arquivo_antigo):

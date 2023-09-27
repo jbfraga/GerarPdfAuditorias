@@ -13,10 +13,17 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
 
     import time
     from PIL import Image
+    import os
+    
+    # Diretório atual do script
+    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+
+    # Caminho relativo para o diretório de download (imagens)
+    caminho_download = os.path.join(diretorio_atual, "imagens")
 
     chrome_options = Options()
     chrome_options.add_experimental_option("prefs", {
-        "download.default_directory": rf"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens",
+        "download.default_directory": caminho_download,
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
         "safebrowsing.enabled": False,
@@ -96,14 +103,14 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
 
     screen = driver.find_elements(By.CSS_SELECTOR,"#MTA-sfEsitoAgenda-HLCasdfa")[0]
 
-    screen.screenshot(rf"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens\img1.png")
+    screen.screenshot(r"imagens\img1.png")
     print("RETORNO OK")
     time.sleep(1)
 
     text_inputss = driver.find_elements(By.TAG_NAME,'textarea')
     for text_input in text_inputss:
         if "NOTESERVIZIO" in text_input.get_attribute("name"):
-            text_input.screenshot(rf"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens\img3.png")
+            text_input.screenshot(r"\imagens\img3.png")
             print("OBS OK")
             break
 
@@ -136,7 +143,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     time.sleep(1)
 
     screen = driver.find_elements(By.CSS_SELECTOR,"#TVSCR-tv_materialigiorno > div > table")[0]
-    screen.screenshot(rf"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens\img2.png")
+    screen.screenshot(r"imagens\img2.png")
     print("MATERIAIS OK")
     driver.quit()
 
@@ -147,7 +154,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     import os
 
     # Diretório onde as imagens estão localizadas
-    image_dir = rf"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens"
+    image_dir = r"imagens"
 
     # Lista de arquivos de imagem no diretório
     image_files = [os.path.join(image_dir, filename) for filename in os.listdir(image_dir)]
@@ -167,7 +174,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
         
         images.append(image)
 
-    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}_eorder.pdf".format(nome_municipio,numero_ordem)
+    pdf_path = r"resultado\{}_{}_eorder.pdf".format(nome_municipio,numero_ordem)
 
     # Salvar as imagens no arquivo PDF
     images[0].save(
@@ -180,12 +187,12 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     from reportlab.pdfgen import canvas
 
     # Diretório onde as imagens estão localizadas
-    image_dir = rf"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens"
+    image_dir = r"imagens"
 
     # Lista de arquivos de imagem no diretório
     image_files = [os.path.join(image_dir, filename) for filename in os.listdir(image_dir)]
 
-    pdf_path = r"C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\resultado\{}_{}_eorder.pdf".format(nome_municipio,numero_ordem)
+    pdf_path = r"resultado\{}_{}_eorder.pdf".format(nome_municipio,numero_ordem)
 
     # Tamanho de página A4 em pontos (595.276 x 841.890)
     page_width, page_height = A4
@@ -235,7 +242,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
 
     """Excluindo as fotos da pasta"""
 
-    dir = rf'C:\Users\bruno.fraga\Desktop\ADS\Códigos Cosampa\Gerar Pdf Auditoria\GerarPdfAuditorias\imagens'
+    dir = r'imagens'
     for file in os.scandir(dir):
         os.remove(file.path)
     print("PASTA LIMPA")
