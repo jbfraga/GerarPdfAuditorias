@@ -30,6 +30,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     driver = webdriver.Chrome(service=Service(), options=options)
 
     # 
+    # 
     """#Login Eorder"""
 
     driver.get("https://eordercoe.enel.com/geocallcoe/w/LoginServlet")
@@ -40,11 +41,14 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     driver.maximize_window()
     print("Login ok")
 
+
+    # 
     # 
     """Acessar Lista TDC"""
     driver.find_elements(By.CSS_SELECTOR,"#TBB_tbm2 > div.tbi")[4].click()
     driver.find_elements(By.CSS_SELECTOR,"#TBB_tbm2 > div.tbi")[0].click()
 
+    # 
     # 
     """Enviar o TDC e acessar os locais de print"""
 
@@ -58,6 +62,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
 
 
 
+    # 
     # 
     """Acessar a página multimida"""
 
@@ -192,6 +197,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     )
 
 
+    # 
     # 
     """Arrumando o PDF"""
     """Falta estudar um Resize das fotos para não ficarem muito grandes,
