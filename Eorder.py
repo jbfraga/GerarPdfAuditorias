@@ -174,7 +174,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
         
         images.append(image)
 
-    pdf_path = r"resultado\{}_{}_eorder.pdf".format(nome_municipio,numero_ordem)
+    pdf_path = r"resultado\{}_{}_eorder.pdf".format(numero_ordem, nome_municipio)
 
     # Salvar as imagens no arquivo PDF
     images[0].save(
@@ -192,7 +192,7 @@ def consulta_Eorder(num_TdC,numero_ordem,nome_municipio,cod_SOB=None):
     # Lista de arquivos de imagem no diretório
     image_files = [os.path.join(image_dir, filename) for filename in os.listdir(image_dir)]
 
-    pdf_path = r"resultado\{}_{}_eorder.pdf".format(nome_municipio,numero_ordem)
+    pdf_path = r"resultado\{}_{}_eorder.pdf".format(numero_ordem, nome_municipio)
 
     # Tamanho de página A4 em pontos (595.276 x 841.890)
     page_width, page_height = A4

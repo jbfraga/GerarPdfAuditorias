@@ -26,7 +26,7 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
         'printing.print_preview_sticky_settings.appState': json.dumps(settings)
     })
 
-    options.add_argument("--window-position=1200,0")
+    options.add_argument("--window-position=1500,0")
     options.add_argument('--kiosk-printing')
     """options.add_argument('--disable-print-preview')"""
 
@@ -129,7 +129,7 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
         caminho_arquivo_antigo = os.path.join(pasta_downloads, nome_arquivo_antigo)
 
         # Nome que você deseja dar ao arquivo
-        nome_arquivo_novo = "{}_{}_jupiter.pdf".format(numero_ordem,nome_municipio)
+        nome_arquivo_novo = "{}_{}_jupiter.pdf".format(nome_municipio, numero_ordem)
 
         # Caminho completo para o arquivo novo
         caminho_arquivo_novo = os.path.join("resultado", nome_arquivo_novo)
