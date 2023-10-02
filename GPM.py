@@ -107,7 +107,7 @@ def consulta_GPM(num_TdC,numero_ordem,nome_municipio,cod_SOB):
     driver.execute_script(
         "let aumentarImagens = document.querySelector('#div_fotos').querySelectorAll('img');aumentarImagens.forEach((el) => {el.style.width = '40%';})")
     print("IMAGENS AUMENTADAS")
-    
+    time.sleep(9)
     driver.execute_script('window.print()')
     time.sleep(5)
     driver.quit()
